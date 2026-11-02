@@ -19,3 +19,14 @@ models:
 
   - name: fact_sales
     description: "Oliver Sales Fact"
+
+  - name: stg_employee_certifications
+    description: >
+      Staging model for employee certifications.
+      Each record represents an employee certification completion, with certification details parsed from JSON.
+
+  - name: fact_certification
+    description: >
+      Oliver Employee Certification Fact.
+      The grain of this table is one row per employee certification completion.
+      Each record represents a certification received by an employee on a specific date, including its name and cost.

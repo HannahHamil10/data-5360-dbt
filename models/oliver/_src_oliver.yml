@@ -8,6 +8,7 @@ sources:
     tables:
       - name: customer
       - name: employee
+      - name: employee_certifications
       - name: orderline
       - name: orders
       - name: product
