@@ -4,12 +4,20 @@ version: 2
 models:
   - name: oliver_dim_customer
     description: "Oliver Customer Dimension"
+    columns:
+      - name: CUSTOMER_KEY
+        data_tests:
+          - unique
 
   - name: oliver_dim_date
     description: "Oliver Date Dimension"
 
   - name: oliver_dim_employee
     description: "Oliver Employee Dimension"
+    columns:
+      - name: EMPLOYEE_KEY
+        data_tests:
+          - not_null
 
   - name: oliver_dim_product
     description: "Oliver Product Dimension"
@@ -24,9 +32,31 @@ models:
     description: >
       Staging model for employee certifications.
       Each record represents an employee certification completion, with certification details parsed from JSON.
+    columns:
+      - name: CERTIFICATION_NAME
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - 'Strategic Retail Operations'
+                  - 'Workplace Safety'
+                  - 'Cash Handling and Security'
+                  - 'Inventory Management'
+                  - 'Conflict Resolution'
+                  - 'Customer Service Excellence'
+                  - 'Product Knowledge Level 2'
+                  - 'Leadership and Coaching'
+                  - 'Point of Sale Operations'
 
   - name: fact_certification
     description: >
       Oliver Employee Certification Fact.
       The grain of this table is one row per employee certification completion.
       Each record represents a certification received by an employee on a specific date, including its name and cost.
+    columns:
+      - name: EMPLOYEE_KEY
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('oliver_dim_employee')
+                field: EMPLOYEE_KEY
