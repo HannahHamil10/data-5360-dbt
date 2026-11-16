@@ -1,0 +1,27 @@
+
+version: 2
+
+sources:
+  - name: ecoessentials_email_events
+    database: GROUP12_ECOESSENTIALS
+    schema: ecoessentials_email_events
+    quoting:
+      schema: true
+    tables:
+      - name: marketing_emails
+        identifier: marketing_emails
+        quoting:
+          identifier: true
+
+  - name: ecoessentials_transactional
+    database: GROUP12_ECOESSENTIALS
+    schema: ECOESSENTIALS_TRANSACTIONAL_DB
+    tables:
+      - name: customer
+      - name: order
+        identifier: ORDER
+        quoting:
+          identifier: true
+      - name: order_line
+      - name: product
+      - name: promotional_campaign
